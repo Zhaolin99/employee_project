@@ -179,4 +179,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 Built with Zhaolin Zhong
 
-GitHub: [@Zhaolin99]
+GitHub: @Zhaolin99
