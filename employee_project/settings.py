@@ -31,6 +31,7 @@ print("✅ DB:", env('DB_NAME'), env('DB_USER'), env('DB_PASSWORD'), env('DB_HOS
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'employees.CustomUser'
 
 # Application definition
 
