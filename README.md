@@ -162,11 +162,9 @@ employee_project/
 ---
 
 ## 🔹 Future Improvements
-- Role-Based Access Control (RBAC): Different permissions for admin vs regular users
-- Deployment with Docker and AWS
-- Export charts as PDF reports
-- Notification system for new attendance records or performance reviews
-
+- Add Role-based Authentication (Admin, HR, Employee). 
+- Add Unit Tests for APIs. 
+- Build a simple UI with Django Templates for charts. 
 ---
 
 ## 🔹 License
