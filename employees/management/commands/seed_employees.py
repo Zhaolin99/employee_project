@@ -9,7 +9,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker()
 
-        # Create departments if none exist
         departments = ['HR', 'Engineering', 'Marketing', 'Sales']
         for name in departments:
             Department.objects.get_or_create(name=name)
@@ -26,4 +25,4 @@ class Command(BaseCommand):
                 department=random.choice(department_objs)
             )
 
-        self.stdout.write(self.style.SUCCESS('Successfully seeded 50 employees.'))
+        self.stdout.write(self.style.SUCCESS('Successfully seeded employees.'))

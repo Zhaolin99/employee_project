@@ -8,6 +8,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from employees.views import charts_view
+from django.http import HttpResponse
 
 swagger_schema_view = get_schema_view(
     openapi.Info(
@@ -35,7 +36,11 @@ schema_view = get_schema_view(
     authentication_classes=[], # Allow Swagger UI Authorization
 )
 
+def home(request):
+    return HttpResponse("Welcome to the Employee Management System")
+
 urlpatterns = [
+    path('', home),
     path('admin/', admin.site.urls),
     path('api/', include('employees.urls')),
     path('api/', include('attendance.urls')),

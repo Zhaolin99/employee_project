@@ -15,8 +15,8 @@ import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-#BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -27,6 +27,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=False)
 
 #print("✅ Loaded DB_NAME:", env("DB_NAME"))
+print("✅ DB:", env('DB_NAME'), env('DB_USER'), env('DB_PASSWORD'), env('DB_HOST'), env('DB_PORT'))
 
 ALLOWED_HOSTS = []
 
