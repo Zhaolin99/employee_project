@@ -10,8 +10,10 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     serializer_class = DepartmentSerializer
     def get_permissions(self):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
-            return [permissions.IsAdminUser()]
+            return [permissions.IsAuthenticated(), IsAdmin()]
         return [permissions.IsAuthenticated()]
+
+
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
@@ -27,19 +29,6 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             permission_classes = [permissions.IsAuthenticated, (IsAdmin | IsHR)]
         else:
             permission_classes = [permissions.IsAuthenticated, (IsAdmin | IsHR | IsEmployee)]
-        return [permission() for permission in permission_classes]
-
-
-
-class EmployeeViewSet(viewsets.ModelViewSet):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-
-    def get_permissions(self):
-        if self.action in ['create', 'update', 'partial_update', 'destroy']:
-            permission_classes = [IsAdmin | IsHR]
-        else:
-            permission_classes = [IsAdmin | IsHR | IsEmployee]
         return [permission() for permission in permission_classes]
 
 # Visulization
