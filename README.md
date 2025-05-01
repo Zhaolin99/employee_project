@@ -195,7 +195,7 @@ Run all tests from the root directory:
 
 ```bash
 python manage.py test employees
-
+```
 
 ## 🔹 Project Structure
 
