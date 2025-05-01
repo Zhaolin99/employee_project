@@ -128,6 +128,29 @@ Authorization: Bearer <access_token>
 
 Protected endpoints require authentication.
 
+
+### 🔐 Role-Based Authentication
+
+This project uses a custom `CustomUser` model with a `role` field to manage permissions across the API.
+
+#### Supported Roles:
+- `Admin`: Full access to all endpoints and models
+- `HR`: Manage employees, view attendance and departments
+- `Employee`: View-only access to own records
+
+Role-based access is enforced using custom DRF permissions (`IsAdmin`, `IsHR`, `IsEmployee`) within each API viewset.
+
+### 🔑 JWT Authentication + Role Enforcement
+
+Obtain a token:
+   ```http
+   POST /api/token/
+   {
+     "username": "adminuser",
+     "password": "yourpassword"
+   }
+Authorization: Bearer <access_token>
+
 ---
 
 ## 🔹 Visualization
@@ -162,7 +185,6 @@ employee_project/
 ---
 
 ## 🔹 Future Improvements
-- Add Role-based Authentication (Admin, HR, Employee). 
 - Add Unit Tests for APIs. 
 - Build a simple UI with Django Templates for charts. 
 ---
