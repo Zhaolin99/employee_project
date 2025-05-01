@@ -1,5 +1,5 @@
 from django.db import models
-from employees.models import Employee  # FK reference
+from employees.models import Employee
 
 class Attendance(models.Model):
     STATUS_CHOICES = [

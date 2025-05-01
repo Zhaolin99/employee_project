@@ -54,6 +54,7 @@ from django.db.models.functions import TruncMonth
 import calendar
 
 # API for Employees per Department
+# dictionary of employee count grouped by department name
 @api_view(['GET'])
 def employees_per_department(request):
     data = Employee.objects.values('department__name').annotate(count=Count('id'))
@@ -61,6 +62,7 @@ def employees_per_department(request):
     return Response(result)
 
 # API for Monthly Attendance Overview
+# dictionary showing attendance count per month
 @api_view(['GET'])
 def monthly_attendance_overview(request):
     data = Attendance.objects.annotate(month=TruncMonth('date')).values('month').annotate(count=Count('id')).order_by('month')

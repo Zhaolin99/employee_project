@@ -1,57 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Employee Management Charts</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Employee Charts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <h2>Employees per Department</h2>
+  <canvas id="employeesChart" width="400" height="400"></canvas>
 
-    <h1>Employees per Department</h1>
-    <canvas id="employeesChart" width="400" height="400"></canvas>
+  <h2>Monthly Attendance Overview</h2>
+  <canvas id="attendanceChart" width="400" height="400"></canvas>
 
-    <h1>Monthly Attendance Overview</h1>
-    <canvas id="attendanceChart" width="400" height="400"></canvas>
+  <script>
+    // Employees per Department Pie Chart
+    fetch('/api/charts/employees-per-department/')
+      .then(response => response.json())
+      .then(data => {
+        const labels = Object.keys(data);
+        const values = Object.values(data);
+        const ctx = document.getElementById('employeesChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              data: values,
+              backgroundColor: ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231'],
+            }]
+          }
+        });
+      });
 
-    <script>
-        // Employees per Department Pie Chart
-        fetch('/api/charts/employees-per-department/')
-          .then(response => response.json())
-          .then(data => {
-            const ctx = document.getElementById('employeesChart').getContext('2d');
-            new Chart(ctx, {
-              type: 'pie',
-              data: {
-                labels: Object.keys(data),
-                datasets: [{
-                  label: 'Employees per Department',
-                  data: Object.values(data),
-                  backgroundColor: ['red', 'blue', 'green', 'yellow', 'purple'],
-                }]
-              }
-            });
-          });
-
-        // Monthly Attendance Overview Bar Chart
-        fetch('/api/charts/monthly-attendance-overview/')
-          .then(response => response.json())
-          .then(data => {
-            const ctx = document.getElementById('attendanceChart').getContext('2d');
-            new Chart(ctx, {
-              type: 'bar',
-              data: {
-                labels: Object.keys(data),
-                datasets: [{
-                  label: 'Monthly Attendance',
-                  data: Object.values(data),
-                  backgroundColor: 'rgba(75, 192, 192, 0.7)'
-                }]
-              }
-            });
-          });
-    </script>
-
+    // Monthly Attendance Bar Chart
+    fetch('/api/charts/monthly-attendance-overview/')
+      .then(response => response.json())
+      .then(data => {
+        const labels = Object.keys(data);
+        const values = Object.values(data);
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Attendance Count',
+              data: values,
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            }]
+          }
+        });
+      });
+  </script>
 </body>
 </html>
+
 
 
