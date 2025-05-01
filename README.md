@@ -128,6 +128,29 @@ Authorization: Bearer <access_token>
 
 Protected endpoints require authentication.
 
+
+### 🔐 Role-Based Authentication
+
+This project uses a custom `CustomUser` model with a `role` field to manage permissions across the API.
+
+#### Supported Roles:
+- `Admin`: Full access to all endpoints and models
+- `HR`: Manage employees, view attendance and departments
+- `Employee`: View-only access to own records
+
+Role-based access is enforced using custom DRF permissions (`IsAdmin`, `IsHR`, `IsEmployee`) within each API viewset.
+
+### 🔑 JWT Authentication + Role Enforcement
+
+Obtain a token:
+   ```http
+   POST /api/token/
+   {
+     "username": "adminuser",
+     "password": "yourpassword"
+   }
+Authorization: Bearer <access_token>
+```
 ---
 
 ## 🔹 Visualization
@@ -140,9 +163,37 @@ Protected endpoints require authentication.
 - API: `/api/charts/monthly-attendance-overview/`
 - Frontend: `/charts/`
 
-Charts are built dynamically using **Chart.js**.
-
 ---
+
+### 🧪 API Unit Testing
+
+This project uses Django's `TestCase` and DRF's `APIClient` to test authentication and API endpoints.
+
+#### 📁 Test Structure
+
+Tests are organized under each app:
+employees/ 
+└── tests/ 
+   ├── test_auth.py # JWT token tests 
+   └── test_employee.py # Role-based access to employee API
+
+#### ✅ Sample Coverage
+
+- 🔐 `test_auth.py`:
+  - Valid and invalid login attempts
+  - Token generation and validation
+
+- 👩‍💼 `test_employee.py`:
+  - HR can list employees
+  - Employees cannot create new records (403 expected)
+
+#### ▶️ Running Tests
+
+Run all tests from the root directory:
+
+```bash
+python manage.py test employees
+```
 
 ## 🔹 Project Structure
 
@@ -162,7 +213,6 @@ employee_project/
 ---
 
 ## 🔹 Future Improvements
-- Add Role-based Authentication (Admin, HR, Employee). 
 - Add Unit Tests for APIs. 
 - Build a simple UI with Django Templates for charts. 
 ---
