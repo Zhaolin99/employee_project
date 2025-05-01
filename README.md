@@ -150,7 +150,7 @@ Obtain a token:
      "password": "yourpassword"
    }
 Authorization: Bearer <access_token>
-
+```
 ---
 
 ## 🔹 Visualization
