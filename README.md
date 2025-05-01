@@ -163,8 +163,6 @@ Authorization: Bearer <access_token>
 - API: `/api/charts/monthly-attendance-overview/`
 - Frontend: `/charts/`
 
-Charts are built dynamically using **Chart.js**.
-
 ---
 
 ### 🧪 API Unit Testing
