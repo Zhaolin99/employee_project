@@ -167,6 +167,36 @@ Charts are built dynamically using **Chart.js**.
 
 ---
 
+### 🧪 API Unit Testing
+
+This project uses Django's `TestCase` and DRF's `APIClient` to test authentication and API endpoints.
+
+#### 📁 Test Structure
+
+Tests are organized under each app:
+employees/ 
+└── tests/ 
+   ├── test_auth.py # JWT token tests 
+   └── test_employee.py # Role-based access to employee API
+
+#### ✅ Sample Coverage
+
+- 🔐 `test_auth.py`:
+  - Valid and invalid login attempts
+  - Token generation and validation
+
+- 👩‍💼 `test_employee.py`:
+  - HR can list employees
+  - Employees cannot create new records (403 expected)
+
+#### ▶️ Running Tests
+
+Run all tests from the root directory:
+
+```bash
+python manage.py test employees
+
+
 ## 🔹 Project Structure
 
 ```
